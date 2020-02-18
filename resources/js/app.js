@@ -12,8 +12,8 @@ Vue.use(VueAxios, axios)
 
 new Vue({
     el: '#app',
+    store,
     router,
     vuetify,
-    store,
     render: h => h(App)
 });

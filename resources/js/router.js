@@ -1,7 +1,24 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from './store';
 
 Vue.use(VueRouter);
+
+const ifAuthenticated = (to, from, next) => {
+    if(store.getters.isAuthenticated) {
+        next()
+    } else {
+        next('/login')
+    }
+}
+
+const ifNotAuthenticated = (to, from, next) => {
+    if(!store.getters.isAuthenticated) {
+        next()
+    } else {
+        next('/dashboard')
+    }
+}
 
 const routes = [
     {
@@ -13,25 +30,19 @@ const routes = [
         path: '/register',
         name: 'register',
         component: () => import('./components/Register'),
-        meta: {
-            auth: false
-        }
+        beforeEnter: ifNotAuthenticated
     },
     {
         path: '/login',
         name: 'login',
         component: () => import('./components/Login'),
-        meta: {
-            auth: false
-        }
+        beforeEnter: ifNotAuthenticated
     },
     {
         path: '/dashboard',
         name: 'dashboard',
         component: () => import('./components/Dashboard'),
-        meta: {
-            auth: true
-        }
+        beforeEnter: ifAuthenticated
     }
 ];
 
@@ -39,20 +50,5 @@ const router = new VueRouter({
     mode: 'hash',
     routes
 });
-
-router.beforeEach((to, from, next) => {
-    let token = localStorage.getItem('token');
-    if (to.matched.some(record => record.meta.auth)) {
-        if (!!token) {
-            next();
-        } else {
-            next({
-                path: '/login',
-            });
-        }
-    } else {
-        next();
-    }
-})
 
 export default router;

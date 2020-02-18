@@ -12,17 +12,18 @@
             </v-toolbar>
             <v-card-text>
               <v-form>
-                <v-text-field label="username"></v-text-field>
-                <v-text-field label="password" type="password"></v-text-field>
-                <v-text-field label="name"></v-text-field>
-                <v-text-field label="email" type="email"></v-text-field>
+                <v-text-field label="name" v-model="registerForm.name"></v-text-field>
+                <v-text-field label="email" type="email" v-model="registerForm.email"></v-text-field>
+                <v-text-field label="password" type="password" v-model="registerForm.password"></v-text-field>
+                <v-text-field label="re-password" type="password" v-model="registerForm.c_password"></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn type="submit" color="primary">Register</v-btn>
+              <v-btn type="submit" color="primary" @click.prevent="register">Register</v-btn>
             </v-card-actions>
           </v-card>
+          <v-snackbar v-model="snackbar" color="error">{{ message }}</v-snackbar>
         </v-col>
       </v-row>
     </v-container>
@@ -31,15 +32,30 @@
 
 <script>
 export default {
-    data: () => ({
-        registerForm: {
-            username: null,
-            password: null,
-            name: null,
-            email: null
-        }
-    }),
-}
+  data: () => ({
+    registerForm: {
+      name: null,
+      email: null,
+      password: null,
+      c_password: null
+    },
+    message: null,
+    snackbar: false
+  }),
+  methods: {
+    register() {
+      this.$store
+        .dispatch("userRegister", this.registerForm)
+        .then(() => {
+          this.$router.push("/login");
+        })
+        .catch(error => {
+          this.message = "Register Failed";
+          this.snackbar = !this.snackbar;
+        });
+    }
+  }
+};
 </script>
 
 

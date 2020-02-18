@@ -40,16 +40,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       registerForm: {
-        username: null,
-        password: null,
         name: null,
-        email: null
-      }
+        email: null,
+        password: null,
+        c_password: null
+      },
+      message: null,
+      snackbar: false
     };
+  },
+  methods: {
+    register: function register() {
+      var _this = this;
+
+      this.$store.dispatch("userRegister", this.registerForm).then(function () {
+        _this.$router.push("/login");
+      })["catch"](function (error) {
+        _this.message = "Register Failed";
+        _this.snackbar = !_this.snackbar;
+      });
+    }
   }
 });
 
@@ -118,17 +133,54 @@ var render = function() {
                             "v-form",
                             [
                               _c("v-text-field", {
-                                attrs: { label: "username" }
+                                attrs: { label: "name" },
+                                model: {
+                                  value: _vm.registerForm.name,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.registerForm, "name", $$v)
+                                  },
+                                  expression: "registerForm.name"
+                                }
                               }),
                               _vm._v(" "),
                               _c("v-text-field", {
-                                attrs: { label: "password", type: "password" }
+                                attrs: { label: "email", type: "email" },
+                                model: {
+                                  value: _vm.registerForm.email,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.registerForm, "email", $$v)
+                                  },
+                                  expression: "registerForm.email"
+                                }
                               }),
                               _vm._v(" "),
-                              _c("v-text-field", { attrs: { label: "name" } }),
+                              _c("v-text-field", {
+                                attrs: { label: "password", type: "password" },
+                                model: {
+                                  value: _vm.registerForm.password,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.registerForm, "password", $$v)
+                                  },
+                                  expression: "registerForm.password"
+                                }
+                              }),
                               _vm._v(" "),
                               _c("v-text-field", {
-                                attrs: { label: "email", type: "email" }
+                                attrs: {
+                                  label: "re-password",
+                                  type: "password"
+                                },
+                                model: {
+                                  value: _vm.registerForm.c_password,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.registerForm,
+                                      "c_password",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "registerForm.c_password"
+                                }
                               })
                             ],
                             1
@@ -144,7 +196,15 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "v-btn",
-                            { attrs: { type: "submit", color: "primary" } },
+                            {
+                              attrs: { type: "submit", color: "primary" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.register($event)
+                                }
+                              }
+                            },
                             [_vm._v("Register")]
                           )
                         ],
@@ -152,6 +212,21 @@ var render = function() {
                       )
                     ],
                     1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-snackbar",
+                    {
+                      attrs: { color: "error" },
+                      model: {
+                        value: _vm.snackbar,
+                        callback: function($$v) {
+                          _vm.snackbar = $$v
+                        },
+                        expression: "snackbar"
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.message))]
                   )
                 ],
                 1

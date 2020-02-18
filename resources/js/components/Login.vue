@@ -12,17 +12,44 @@
             </v-toolbar>
             <v-card-text>
               <v-form>
-                <v-text-field label="username"></v-text-field>
-                <v-text-field label="password" type="password"></v-text-field>
+                <v-text-field label="email" type="email" v-model="loginForm.email"></v-text-field>
+                <v-text-field label="password" type="password" v-model="loginForm.password"></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn type="submit" color="primary">Login</v-btn>
+              <v-btn type="submit" color="primary" @click.prevent="login">Login</v-btn>
             </v-card-actions>
           </v-card>
+          <v-snackbar v-model="snackbar" color="error">{{ message }}</v-snackbar>
         </v-col>
       </v-row>
     </v-container>
   </v-content>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    loginForm: {
+      email: null,
+      password: null
+    },
+    message: null,
+    snackbar: false
+  }),
+  methods: {
+    async login() {
+      await this.$store
+        .dispatch("authRequest", this.loginForm)
+        .then(() => {
+            this.$router.push("/dashboard");
+        })
+        .catch(error => {
+          this.message = "Login Failed";
+          this.snackbar = !this.snackbar;
+        });
+    }
+  }
+};
+</script>
