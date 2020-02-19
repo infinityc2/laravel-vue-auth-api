@@ -60799,7 +60799,7 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(undefined
 });
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
   baseURL: 'http://localhost:8000/api',
-  timeout: 1000
+  timeout: 5000
 }));
 
 /***/ }),
@@ -60842,29 +60842,44 @@ var routes = [{
   path: '/',
   name: 'home',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/components/Home.vue"));
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/components/Home.vue"));
   }
 }, {
   path: '/register',
   name: 'register',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Register */ "./resources/js/components/Register.vue"));
+    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Register */ "./resources/js/components/Register.vue"));
   },
   beforeEnter: ifNotAuthenticated
 }, {
   path: '/login',
   name: 'login',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./components/Login */ "./resources/js/components/Login.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./components/Login */ "./resources/js/components/Login.vue"));
   },
   beforeEnter: ifNotAuthenticated
 }, {
   path: '/dashboard',
   name: 'dashboard',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/Dashboard */ "./resources/js/components/Dashboard.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Dashboard */ "./resources/js/components/Dashboard.vue"));
   },
-  beforeEnter: ifAuthenticated
+  beforeEnter: ifAuthenticated,
+  children: [{
+    path: '',
+    redirect: 'articles'
+  }, {
+    path: 'articles',
+    name: 'articles',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/Articles */ "./resources/js/components/Articles.vue"));
+    }
+  }, {
+    path: 'articles/:id',
+    component: function component() {
+      return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/DisplayArticle */ "./resources/js/components/DisplayArticle.vue"));
+    }
+  }]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'hash',

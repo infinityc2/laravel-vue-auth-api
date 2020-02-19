@@ -16,5 +16,5 @@ axios.interceptors.response.use(undefined, error => {
 
 export default axios.create({
     baseURL: 'http://localhost:8000/api',
-    timeout: 1000
+    timeout: 5000
 })
