@@ -42,7 +42,22 @@ const routes = [
         path: '/dashboard',
         name: 'dashboard',
         component: () => import('./components/Dashboard'),
-        beforeEnter: ifAuthenticated
+        beforeEnter: ifAuthenticated,
+        children: [
+            {
+                path: '',
+                redirect: 'articles'
+            },
+            {
+                path: 'articles',
+                name: 'articles',
+                component: () => import('./components/Articles')
+            },
+            {
+                path: 'articles/:id',
+                component: () => import('./components/DisplayArticle')
+            }
+        ]
     }
 ];
 
