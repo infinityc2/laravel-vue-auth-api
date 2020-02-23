@@ -10,7 +10,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="info" @click="editArticle">EDIT</v-btn>
+          <v-btn color="info" @click="createArticle">CREATE</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -26,18 +26,13 @@ export default {
     }
   }),
   methods: {
-    async editArticle() {
+    async createArticle() {
       this.$http
-        .put(`articles/${this.$route.params.id}`, this.article)
+        .post(`articles`, this.article)
         .then(() => {
           this.$route.go(-1);
         });
     }
-  },
-  created() {
-    this.$http.get(`articles/${this.$route.params.id}`).then(response => {
-      this.article = response.data.data;
-    });
   }
 };
 </script>
