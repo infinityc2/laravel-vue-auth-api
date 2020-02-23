@@ -56,6 +56,14 @@ const routes = [
             {
                 path: 'articles/:id',
                 component: () => import('./components/DisplayArticle')
+            },
+            {
+                path: 'articles/create',
+                component: () => import('./components/CreateArticle')
+            },
+            {
+                path: 'articles/edit/:id',
+                component: () => import('./components/EditArticle')
             }
         ]
     }

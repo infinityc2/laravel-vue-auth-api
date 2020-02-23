@@ -12,8 +12,20 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="info">EDIT</v-btn>
-          <v-btn color="error" @click="deleteArticle">DELETE</v-btn>
+          <v-btn color="info" :to="{ path: 'edit', params: { id: article.id } }">EDIT</v-btn>
+          <warning-dialog
+            btnTxt="DELETE"
+            btnColor="error"
+            titleTxt="Delete Article"
+            :descripeTxt="`Are you sure you want to delete ${article.title}`"
+            acceptTxt="Yes, delete it."
+            cancelTxt="No, Do not delete it."
+            acceptColor="error"
+            cancelColor="primary"
+            :acceptTypeTxt="true"
+            :cancelTypeTxt="false"
+            @acceptHandle="deleteArticle"
+            />
         </v-card-actions>
       </v-card>
     </v-col>
@@ -21,7 +33,12 @@
 </template>
 
 <script>
+import WarningDialog from "./WarningDialog";
+
 export default {
+  components: {
+    WarningDialog
+  },
   data: () => ({
     article: {
       title: "",
