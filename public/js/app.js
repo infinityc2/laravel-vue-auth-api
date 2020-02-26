@@ -60842,27 +60842,27 @@ var routes = [{
   path: '/',
   name: 'home',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/components/Home.vue"));
+    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./components/Home */ "./resources/js/components/Home.vue"));
   }
 }, {
   path: '/register',
   name: 'register',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Register */ "./resources/js/components/Register.vue"));
+    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/Register */ "./resources/js/components/Register.vue"));
   },
   beforeEnter: ifNotAuthenticated
 }, {
   path: '/login',
   name: 'login',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./components/Login */ "./resources/js/components/Login.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./components/Login */ "./resources/js/components/Login.vue"));
   },
   beforeEnter: ifNotAuthenticated
 }, {
   path: '/dashboard',
   name: 'dashboard',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Dashboard */ "./resources/js/components/Dashboard.vue"));
+    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Dashboard */ "./resources/js/components/Dashboard.vue"));
   },
   beforeEnter: ifAuthenticated,
   children: [{
@@ -60872,12 +60872,22 @@ var routes = [{
     path: 'articles',
     name: 'articles',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/Articles */ "./resources/js/components/Articles.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/Articles */ "./resources/js/components/Articles.vue"));
     }
   }, {
     path: 'articles/:id',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./components/DisplayArticle */ "./resources/js/components/DisplayArticle.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./components/DisplayArticle */ "./resources/js/components/DisplayArticle.vue"));
+    }
+  }, {
+    path: 'articles/create/article',
+    component: function component() {
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./components/CreateArticle */ "./resources/js/components/CreateArticle.vue"));
+    }
+  }, {
+    path: 'articles/edit/:id',
+    component: function component() {
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./components/EditArticle */ "./resources/js/components/EditArticle.vue"));
     }
   }]
 }];
