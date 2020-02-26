@@ -1,7 +1,7 @@
 <template>
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="dialog" width="50%">
     <template v-slot:activator="{ on }">
-      <v-btn v-on="on" :color="btnColor" >{{ btnTxt }}</v-btn>
+      <v-btn v-on="on" :color="btnColor">{{ btnTxt }}</v-btn>
     </template>
     <v-card>
       <v-card-title class="headline">{{ titleTxt }}</v-card-title>
@@ -53,7 +53,7 @@ export default {
       default: true
     },
     btnColor: {
-        default: "primary"
+      default: "primary"
     }
   },
   data: () => ({

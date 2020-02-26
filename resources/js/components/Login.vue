@@ -11,7 +11,7 @@
               <v-toolbar-title>Login</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
-              <v-form>
+              <v-form @submit.prevent="login">
                 <v-text-field label="email" type="email" v-model="loginForm.email"></v-text-field>
                 <v-text-field label="password" type="password" v-model="loginForm.password"></v-text-field>
               </v-form>

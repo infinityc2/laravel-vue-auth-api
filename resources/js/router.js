@@ -58,7 +58,7 @@ const routes = [
                 component: () => import('./components/DisplayArticle')
             },
             {
-                path: 'articles/create',
+                path: 'articles/create/article',
                 component: () => import('./components/CreateArticle')
             },
             {
